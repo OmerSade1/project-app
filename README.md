@@ -95,4 +95,32 @@ To run the Node.js application and MongoDB locally using Docker Compose, follow 
 docker-compose up
 
 
+## Terraform Setup
+
+Terraform is used to provision AWS infrastructure, including VPC, EKS, ECR, ACM, NGINX Ingress, and IAM roles. Follow these steps to run Terraform.
+
+### Prerequisites
+
+1. **Install Terraform**: If you don't have Terraform installed, download it from the [official Terraform website](https://www.terraform.io/downloads.html).
+
+2. **Configure AWS CLI**: Make sure you have the AWS CLI configured with the necessary credentials. To set up the AWS CLI, run the following command and follow the prompts:
+
+    ```bash
+    aws configure
+    ```
+
+### Steps to Run Terraform
+
+#### 1. Initialize Terraform
+
+Navigate to the `terraform` directory and initialize Terraform to download the required providers and modules.
+
+```bash
+cd terraform
+
+terraform init
+
+terraform plan
+
+terraform apply
 
