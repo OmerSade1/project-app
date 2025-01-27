@@ -1,0 +1,6 @@
+cidr_block = "10.0.0.0/16"
+region = "us-east-1"
+instance_type = "t3.medium"
+assume_role = "arn:aws:iam::058264527754:role/_AdminRole"
+environment = "dev"
+domain_name = "omsad.xyz"

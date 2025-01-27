@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.omsad.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: nodejs-app
+            name: 
+            port:
+              number: 3000
