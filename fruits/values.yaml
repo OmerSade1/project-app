@@ -6,7 +6,7 @@ nodejsApp:
   name: nodejs-app
   image:
     repository: 058264527754.dkr.ecr.us-east-1.amazonaws.com/fruits-app
-    tag: app-6094d42
+    tag: app-7dbfa01
   containerPort: 3000
   env:
     mongoUri: mongodb://mongo:27017
