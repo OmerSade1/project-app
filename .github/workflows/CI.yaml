@@ -74,9 +74,8 @@ jobs:
   
       - name: Commit and Push Changes
         run: |
-            cd /home/runner/work/project-app/
-            git add .
-            git commit -m "Update image tag"
+            git add fruits/values.yaml
+            git commit -m "Update image tag to app-${{ env.sha }}
             git push
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
