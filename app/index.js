@@ -5,7 +5,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://mongo:27017";
 
-
 app.get("/", async (req, res) => {
   const client = new MongoClient(MONGO_URI);
   try {
