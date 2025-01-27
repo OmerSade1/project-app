@@ -65,24 +65,15 @@ jobs:
             git config --global user.name "GitHub Actions"
             git config --global user.email "actions@github.com"
   
-   
-      - name: Clone GitOps Repository
-        run: |
-            cd /home/runner/work/
-            git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/OmerSade1/project-app.git
-            cd /home/runner/work/project-app/fruits/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-  
+     
       - name: Update Values File
         run: |
-            cd /home/runner/work/project-app/fruits/
+            cd fruits/
   
             sed -i "s|tag: app-.*|tag: app-${{ env.sha }}|" values.yaml
   
       - name: Commit and Push Changes
         run: |
-            cd /home/runner/work/project-app/
             git add .
             git commit -m "Update image tag"
             git push
