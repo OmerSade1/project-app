@@ -1,34 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodejs-app
+  name: {{ .Values.nodejsApp.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCounts.nodejsApp }}
   selector:
     matchLabels:
-      app: nodejs-app
+      app: {{ .Values.nodejsApp.name }}
   template:
     metadata:
       labels:
-        app: nodejs-app
+        app: {{ .Values.nodejsApp.name }}
     spec:
       containers:
-      - name: nodejs-app
-        image: your-nodejs-image:latest # Replace with your image name
+      - name: {{ .Values.nodejsApp.name }}
+        image: {{ .Values.nodejsApp.image.repository }}:{{ .Values.nodejsApp.image.tag }}
         ports:
-        - containerPort: 3000
+        - containerPort: {{ .Values.nodejsApp.containerPort }}
         env:
         - name: MONGO_URI
-          value: "mongodb://mongo:27017"
+          value: {{ .Values.nodejsApp.env.mongoUri }}
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodejs-app
+  name: {{ .Values.nodejsApp.name }}
 spec:
   selector:
-    app: nodejs-app
+    app: {{ .Values.nodejsApp.name }}
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: {{ .Values.services.nodejsApp.port }}
+      targetPort: {{ .Values.services.nodejsApp.targetPort }}

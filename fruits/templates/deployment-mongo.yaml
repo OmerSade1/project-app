@@ -1,41 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: {{ .Values.mongoDB.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCounts.mongoDB }}
   selector:
     matchLabels:
-      app: mongodb
+      app: {{ .Values.mongoDB.name }}
   template:
     metadata:
       labels:
-        app: mongodb
+        app: {{ .Values.mongoDB.name }}
     spec:
       containers:
-      - name: mongo
-        image: mongo:8.0
+      - name: {{ .Values.mongoDB.name }}
+        image: {{ .Values.mongoDB.image.repository }}:{{ .Values.mongoDB.image.tag }}
         ports:
-        - containerPort: 27017
+        - containerPort: {{ .Values.mongoDB.containerPort }}
         volumeMounts:
         - name: init-script
-          mountPath: /docker-entrypoint-initdb.d/init-mongo.js
-          subPath: init-mongo.js
+          mountPath: /docker-entrypoint-initdb.d/{{ .Values.mongoDB.volume.scriptName }}
+          subPath: {{ .Values.mongoDB.volume.scriptName }}
           readOnly: true
       volumes:
       - name: init-script
         configMap:
-          name: mongo-init-script
+          name: {{ .Values.mongoDB.volume.configMapName }}
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo
+  name: {{ .Values.mongoDB.name }}
 spec:
   selector:
-    app: mongodb
+    app: {{ .Values.mongoDB.name }}
   ports:
     - protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: {{ .Values.services.mongo.port }}
+      targetPort: {{ .Values.services.mongo.targetPort }}
+
