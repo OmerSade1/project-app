@@ -1,11 +1,13 @@
-Project Overview
+# Node.js Application with MongoDB on AWS using Terraform, Helm, and ArgoCD
 
-This project is designed to deploy a Node.js application with a MongoDB database on AWS using Terraform, Helm, and ArgoCD. The GitHub Actions CI pipeline builds the Node.js Docker image, tests it, tags it with the commit SHA, updates the Helm chart's values.yaml with the new image tag, and pushes the image to Amazon ECR. ArgoCD is used for continuous delivery, managing Kubernetes deployments from the Helm chart.
+## Project Overview
 
-Project Structure
+This project is designed to deploy a Node.js application with a MongoDB database on AWS using Terraform, Helm, and ArgoCD. The GitHub Actions CI pipeline builds the Node.js Docker image, tests it, tags it with the commit SHA, updates the Helm chart's `values.yaml` with the new image tag, and pushes the image to Amazon ECR. ArgoCD is used for continuous delivery, managing Kubernetes deployments from the Helm chart.
+
+## Project Structure
+
+```plaintext
 graphql
-Copy
-Edit
 ├── app
 │   ├── Dockerfile              # Dockerfile for building the Node.js application
 │   ├── index.js               # Main entry file for the Node.js application
@@ -39,34 +41,58 @@ Edit
 │   ├── variables.tf           # Terraform variables definition
 │   └── vpc.tf                 # VPC configuration for AWS
 └── terraform.tfstate          # Terraform state file
+
 Key Components
+
 Node.js Application (app)
-This folder contains the Node.js application that interacts with a MongoDB database. The Dockerfile is used to build the Docker image for the app, and index.js is the main entry file. The package.json defines the application's dependencies.
+Dockerfile: Builds the Docker image for the Node.js application.
+index.js: Main entry file for the Node.js app.
+package.json: Defines the app's dependencies.
 
 MongoDB (db)
-The db folder contains the MongoDB initialization script, init-mongo.js, which is used to set up the database.
+init-mongo.js: MongoDB initialization script used to set up the database.
 
 Helm Chart (fruits)
-The fruits folder contains a Helm chart for deploying the Node.js application and MongoDB on Kubernetes. It includes Kubernetes manifest templates for:
+The Helm chart contains the configuration for deploying both the Node.js app and MongoDB on Kubernetes.
 
-deployment-app.yaml: Deploys the Node.js application
-deployment-mongo.yaml: Deploys MongoDB
-configmap.yaml: Configures environment variables or configuration for the app
-ingress.yaml: Defines ingress resources for external access to the app
-The values.yaml file contains the configuration for the Helm chart, including the image tag for the Node.js app. This tag will be updated by the CI pipeline with the latest commit SHA.
-
+deployment-app.yaml: Kubernetes deployment definition for the Node.js app.
+deployment-mongo.yaml: Kubernetes deployment definition for MongoDB.
+configmap.yaml: ConfigMap definition for app configuration or environment variables.
+ingress.yaml: Ingress resource definition to expose the app to external traffic.
+values.yaml: Configuration file containing the image tag for the Node.js app (updated by the CI pipeline).
 Terraform (terraform)
-The terraform folder contains Terraform configuration files to provision the AWS infrastructure required for the project:
+Terraform is used to provision the required AWS infrastructure:
 
-VPC, EKS, ACM, ECR, IAM, and Ingress NGINX resources are defined here.
-The terraform.tfvars file contains variables used in the Terraform configurations.
+VPC: Defines the virtual private cloud for the project.
+EKS: Sets up Amazon EKS for Kubernetes clusters.
+ECR: Configures Amazon Elastic Container Registry for storing Docker images.
+ACM: Sets up SSL/TLS certificates for secure communication.
+NGINX Ingress: Configures NGINX Ingress controller for handling incoming traffic.
+IAM: Sets up IAM OIDC for secure authentication with EKS.
+
 ArgoCD (argocd)
-The argocd/application.yaml file is an ArgoCD application definition that links the Helm chart (fruits) with Kubernetes. It monitors the values.yaml file for updates to the Node.js Docker image tag and triggers redeployment in Kubernetes.
+application.yaml: ArgoCD application manifest that monitors the values.yaml file in the Helm chart and triggers redeployment in Kubernetes when the image tag is updated.
 
 CI/CD Pipeline (GitHub Actions)
-The CI pipeline is configured in GitHub Actions and performs the following steps:
+The CI pipeline builds, tests, and deploys the Node.js application with the following steps:
 
-Build and Test: The Node.js Docker image is built, and the app is tested.
+Build and Test: The Node.js Docker image is built and the app is tested.
 Tagging: The image is tagged with the commit SHA.
-Helm Chart Update: The values.yaml file in the fruits Helm chart is updated with the new image tag.
-Push to ECR: The Docker image is pushed to the Amazon Elastic Container Registry (ECR).
+Helm Chart Update: The values.yaml file in the Helm chart is updated with the new image tag.
+Push to ECR: The Docker image is pushed to Amazon Elastic Container Registry (ECR).
+
+## Usage
+
+### Local Development with Docker Compose
+
+To run the Node.js application and MongoDB locally using Docker Compose, follow these steps:
+
+1. Ensure you have **Docker** and **Docker Compose** installed on your system.
+2. Navigate to the root directory of the project.
+3. Run the following command to start the Node.js app and MongoDB containers:
+
+```bash
+docker-compose up
+
+
+
