@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/OmerSade1/project-app
+    repoURL: https://github.com/OmerSade1/project-app.git
     targetRevision: HEAD
-    chart: fruits
+    path: fruits
     helm:
       valueFiles:
         - values.yaml 

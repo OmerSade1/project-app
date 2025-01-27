@@ -12,7 +12,7 @@ nodejsApp:
     mongoUri: mongodb://mongo:27017
 
 mongoDB:
-  name: mongodb
+  name: mongo
   image:
     repository: mongo
     tag: 8.0
