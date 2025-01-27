@@ -60,6 +60,7 @@ deployment-mongo.yaml: Kubernetes deployment definition for MongoDB.
 configmap.yaml: ConfigMap definition for app configuration or environment variables.
 ingress.yaml: Ingress resource definition to expose the app to external traffic.
 values.yaml: Configuration file containing the image tag for the Node.js app (updated by the CI pipeline).
+
 Terraform (terraform)
 Terraform is used to provision the required AWS infrastructure:
 
