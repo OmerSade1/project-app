@@ -5,16 +5,16 @@ replicaCounts:
 nodejsApp:
   name: nodejs-app
   image:
-    repository: "058264527754.dkr.ecr.us-east-1.amazonaws.com/fruits-app"
-    tag: "app-test"
+    repository: 058264527754.dkr.ecr.us-east-1.amazonaws.com/fruits-app
+    tag: app-test
   containerPort: 3000
   env:
-    mongoUri: "mongodb://mongo:27017"
+    mongoUri: mongodb://mongo:27017
 
 mongoDB:
   name: mongodb
   image:
-    repository: "mongo"
+    repository: mongo
     tag: "8.0"
   containerPort: 27017
   volume:
