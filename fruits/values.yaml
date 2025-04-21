@@ -5,7 +5,7 @@ replicaCounts:
 nodejsApp:
   name: nodejs-app
   image:
-    repository: registry.ocp.octopus.local:5000/frontend-app
+    repository: omersade/nodejs-app
     tag: latest
   containerPort: 3000
   env:
