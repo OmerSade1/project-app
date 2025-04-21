@@ -5,8 +5,8 @@ replicaCounts:
 nodejsApp:
   name: nodejs-app
   image:
-    repository: 058264527754.dkr.ecr.us-east-1.amazonaws.com/fruits-app
-    tag: app-f55d6ac
+    repository: registry.ocp.octopus.local:5000/frontend-app
+    tag: latest
   containerPort: 3000
   env:
     mongoUri: mongodb://mongo:27017
@@ -14,8 +14,8 @@ nodejsApp:
 mongoDB:
   name: mongo
   image:
-    repository: mongo
-    tag: 8.0
+    repository: docker.io/mongo
+    tag: latest
   containerPort: 27017
   volume:
     configMapName: mongo-init-script

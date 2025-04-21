@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: nodejs-app
+spec:
+  host: nodejs-app.apps.ocp.octopus.local
+  to:
+    kind: Service
+    name: nodejs-app
+  port:
+    targetPort: 3000
+  tls:
+    termination: edge

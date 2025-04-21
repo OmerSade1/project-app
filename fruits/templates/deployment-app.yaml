@@ -12,6 +12,8 @@ spec:
       labels:
         app: {{ .Values.nodejsApp.name }}
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
       - name: {{ .Values.nodejsApp.name }}
         image: {{ .Values.nodejsApp.image.repository }}:{{ .Values.nodejsApp.image.tag }}
