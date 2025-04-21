@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: nodejs-app
 spec:
-  host: nodejs-app.apps.ocp.octopus.local
+  host: nodejs-app.apps.ocp.octopus.labs
   to:
     kind: Service
     name: nodejs-app
