@@ -5,8 +5,8 @@ replicaCounts:
 nodejsApp:
   name: nodejs-app
   image:
-    repository: omersade/nodejs-app
-    tag: latest
+    repository: docker.io/omersade/nodejs-app 
+    tag: v1
   containerPort: 3000
   env:
     mongoUri: mongodb://mongo:27017
