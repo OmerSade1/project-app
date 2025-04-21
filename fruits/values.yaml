@@ -29,7 +29,4 @@ services:
     port: 27017
     targetPort: 27017
 
-ingress:
-  className: nginx
-  host: "app.omsad.xyz"
 
