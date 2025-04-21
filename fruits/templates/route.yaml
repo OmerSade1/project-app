@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: nodejs-app
 spec:
-  host: nodejs-app.apps.ocp.octopus.labs
+  host: <your host name in the managed-cluster>
   to:
     kind: Service
     name: nodejs-app
